@@ -17,8 +17,8 @@ public class Spawn : MonoBehaviour
         for (i = 0; i < 10; i++)
         {
             spawn();
-            svl.allEenemies.Add(GameObject.Find("Enemy" + i));
-            svl.initialSpawn.Add(GameObject.Find("Enemy" + i).transform.position);
+            svl.allEenemies.Add(GameObject.Find(""+i));
+            svl.initialSpawn.Add(GameObject.Find(""+i).transform.position);
         }
     }
 
@@ -26,6 +26,6 @@ public class Spawn : MonoBehaviour
     {
         Vector3 randomSpawnPosition = new Vector3(Random.Range(-12, 6), 1, Random.Range(-2, 8));
         var en = Instantiate(enemy, randomSpawnPosition, transform.rotation);
-        en.name = "Enemy" + i;
+        en.name = "" + i;
     }
 }

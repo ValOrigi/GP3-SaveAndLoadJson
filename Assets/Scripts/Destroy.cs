@@ -17,7 +17,7 @@ public class Destroy : MonoBehaviour
         if (collision.gameObject.CompareTag("Enemy")) 
         {
             svl.enemyNames.Add(collision.gameObject.name);
-            svl.initialSpawn.Remove(collision.gameObject.transform.position);
+            svl.initialSpawn.RemoveAt(int.Parse(collision.gameObject.name));
             collision.gameObject.SetActive(false);
             Destroy(this.gameObject);
         }

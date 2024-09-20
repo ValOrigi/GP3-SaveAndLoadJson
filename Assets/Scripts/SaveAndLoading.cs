@@ -9,7 +9,7 @@ public class SaveAndLoading : MonoBehaviour
     private int numOfEnemies;
     public GameObject player;
     public List<GameObject> allEenemies;
-    [HideInInspector]public List<string> enemyNames = new List<string>();
+    [HideInInspector] public List<string> enemyNames = new List<string>();
     public List<Vector3> initialSpawn = new List<Vector3>();
 
     void Update()
@@ -19,7 +19,6 @@ public class SaveAndLoading : MonoBehaviour
             SaveData saveData = new SaveData()
             {
                 position = player.transform.position,
-                rotation = player.transform.rotation,
                 enemy = enemyNames,
                 enemyPos = initialSpawn,
                 enemyNum = enemyNames.Count,
@@ -41,17 +40,15 @@ public class SaveAndLoading : MonoBehaviour
                 SaveData saveData = JsonUtility.FromJson<SaveData>(ReadData);
 
                 player.transform.position = saveData.position;
-                player.transform.rotation = saveData.rotation;
 
                 numOfEnemies = saveData.enemyNum;
                 
                 List<string> enemyNames = saveData.enemy;
-                List<Vector3> loadSpawn = saveData.enemyPos;
 
                 //load position
-                for (int i = 0; i < 10-numOfEnemies; i++)
+                for (int i = 0; i < 10; i++)
                 {
-                    GameObject.Find("Enemy" + i).transform.position = loadSpawn[i];
+                    GameObject.Find(""+i).transform.position = saveData.enemyPos[i];
                 }
 
                 //deload all inactive
@@ -73,7 +70,6 @@ public class SaveAndLoading : MonoBehaviour
     public class SaveData
     {
         public Vector3 position;
-        public Quaternion rotation;
         public int enemyNum;
         public List<string> enemy;
         public List<Vector3> enemyPos;
